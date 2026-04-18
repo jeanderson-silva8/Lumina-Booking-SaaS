@@ -22,5 +22,6 @@ SaaS Analítico (Analytics Engine) focado em simular métricas reais, faturament
 - [ ] UI de Dashboards ultra-rápidos e design premium.
 
 ### Fase 5: Gatilho
-- [ ] CI/CD Pipelines (GitHub Actions).
-- [ ] Deploy.
+- [x] CI/CD Pipelines (GitHub Actions).
+- [x] Deploy Backend (DigitalOcean/EC2 via SSH).
+- [x] Deploy Frontend (Vercel CDN Global).

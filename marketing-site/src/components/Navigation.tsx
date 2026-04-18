@@ -76,7 +76,7 @@ export function Navigation() {
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-4">
               <motion.a
-                href="https://frontend-woad-ten-96.vercel.app/dashboard"
+                href="https://frontend-vert-eight-77.vercel.app/dashboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-gradient px-6 py-2.5 rounded-full text-sm font-semibold text-black flex items-center gap-2"
@@ -127,7 +127,7 @@ export function Navigation() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                href="https://frontend-woad-ten-96.vercel.app/dashboard"
+                href="https://frontend-vert-eight-77.vercel.app/dashboard"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-gradient px-8 py-3 rounded-full text-lg font-semibold text-black flex items-center gap-2 mt-4"

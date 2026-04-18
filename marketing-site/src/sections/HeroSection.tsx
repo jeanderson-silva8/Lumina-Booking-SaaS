@@ -69,7 +69,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
           >
             <motion.a
-              href="https://frontend-woad-ten-96.vercel.app/dashboard"
+              href="https://frontend-vert-eight-77.vercel.app/dashboard"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-8 py-4 rounded-full btn-gradient text-black font-semibold text-lg flex items-center gap-3 overflow-hidden"

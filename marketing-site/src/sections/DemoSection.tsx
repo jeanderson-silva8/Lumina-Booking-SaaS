@@ -233,7 +233,7 @@ export function DemoSection() {
           className="mt-12 text-center"
         >
           <motion.a
-            href="https://frontend-woad-ten-96.vercel.app/dashboard"
+            href="https://frontend-vert-eight-77.vercel.app/dashboard"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 btn-gradient px-10 py-5 rounded-full text-black font-bold text-xl"

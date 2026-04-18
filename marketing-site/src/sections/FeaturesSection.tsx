@@ -166,7 +166,7 @@ export function FeaturesSection() {
             Quer ver todas as funcionalidades em ação?
           </p>
           <motion.a
-            href="https://frontend-woad-ten-96.vercel.app/dashboard"
+            href="https://frontend-vert-eight-77.vercel.app/dashboard"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/10 transition-colors"

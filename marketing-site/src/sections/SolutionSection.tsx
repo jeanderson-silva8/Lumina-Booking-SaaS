@@ -102,7 +102,7 @@ export function SolutionSection() {
 
             {/* CTA */}
             <motion.a
-              href="https://frontend-woad-ten-96.vercel.app/dashboard"
+              href="https://frontend-vert-eight-77.vercel.app/dashboard"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 btn-gradient px-8 py-4 rounded-full text-black font-semibold text-lg"
