@@ -170,7 +170,7 @@ function Dashboard() {
           <h1 className="dashboard-title text-gradient">Métricas Financeiras</h1>
         </div>
         
-        <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
+        <div className="header-actions">
           <div className="filter-bar glass-panel" style={{ padding: '0.25rem' }}>
             {['Últimos 30 Dias', 'Últimos 12 Meses', 'Todo o Histórico'].map((filter) => (
               <button

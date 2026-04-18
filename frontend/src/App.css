@@ -204,3 +204,6 @@
   0% { box-shadow: 0 0 15px rgba(135, 98, 240, 0.2); }
   100% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.4); }
 }
+ 
+.header-actions { display: flex; gap: 1rem; align-items: center; }  
+@media (max-width: 768px) { .dashboard-header { flex-direction: column; align-items: stretch; gap: 1rem; } .header-actions { flex-direction: column; align-items: stretch; gap: 1rem; width: 100%; } .filter-bar { display: flex; flex-wrap: wrap; justify-content: center; width: 100%; padding: 0.5rem !important; } .filter-btn { flex: 1; min-width: max-content; text-align: center; } .demo-btn-primary { width: 100%; justify-content: center; } } 
