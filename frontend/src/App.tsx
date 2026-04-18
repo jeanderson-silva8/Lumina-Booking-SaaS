@@ -3,6 +3,7 @@ import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Login from './pages/Login';
 import ProtectedRoute from './components/ProtectedRoute';
+import IntegrationShowcase from './pages/IntegrationShowcase';
 import './App.css';
 
 function App() {
@@ -14,6 +15,11 @@ function App() {
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="/integration-showcase" element={
+          <ProtectedRoute>
+            <IntegrationShowcase />
           </ProtectedRoute>
         } />
       </Routes>

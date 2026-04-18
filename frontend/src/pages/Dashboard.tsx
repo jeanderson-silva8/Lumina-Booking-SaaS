@@ -131,7 +131,7 @@ function Dashboard() {
           <button 
             className="demo-btn-primary animate-pulse-glow"
             style={{ padding: '0.6rem 1.2rem', display: 'flex', gap: '0.5rem', alignItems: 'center', fontWeight: 'bold' }}
-            onClick={() => alert('Fluxo de Integração (Stripe/Hotmart) será iniciado...')}
+            onClick={() => navigate('/integration-showcase')}
           >
             <Activity size={18} />
             Conectar minha operação
