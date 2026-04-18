@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Database, Lock, Server, Link, Activity, Zap } from 'lucide-react';
+import { ArrowLeft, Lock, Server, Link, Activity, Zap } from 'lucide-react';
 
 export default function IntegrationShowcase() {
   const navigate = useNavigate();
