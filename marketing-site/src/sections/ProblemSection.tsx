@@ -23,7 +23,7 @@ const problems = [
     icon: TrendingDown,
     title: 'Vazamento de Receita',
     description: 'Dinheiro saindo da empresa todos os dias sem visibilidade. Cada dia sem dados é dinheiro perdido.',
-    stat: 'R$',
+    stat: '-R$ 1.500',
     statLabel: 'perdido diariamente',
     color: 'from-purple-400 to-indigo-500',
   },
