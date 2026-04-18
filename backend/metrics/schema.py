@@ -3,6 +3,7 @@ from datetime import datetime
 from django.db.models import Sum, Q
 from django.db.models.functions import TruncDay
 from graphene_django.types import DjangoObjectType
+from graphql_jwt.decorators import login_required
 from .models import Subscription
 
 class SummaryMetrics(graphene.ObjectType):
@@ -28,6 +29,7 @@ class Query(graphene.ObjectType):
         end_date=graphene.String(required=True)
     )
 
+    @login_required
     def resolve_dashboard_metrics(self, info, start_date, end_date):
         dt_start = datetime.fromisoformat(start_date.replace("Z", "+00:00"))
         dt_end = datetime.fromisoformat(end_date.replace("Z", "+00:00"))

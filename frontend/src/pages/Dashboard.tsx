@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Activity, DollarSign, RefreshCcw, UserMinus, AlertTriangle } from 'lucide-react';
 import { MetricCard } from '../components/MetricCard';
 import { DashboardChart } from '../components/DashboardChart';
@@ -33,11 +34,19 @@ const getFilterDates = (filter: string) => {
 
 function Dashboard() {
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [timeFilter, setTimeFilter] = useState('Últimos 12 Meses');
   const [metrics, setMetrics] = useState<any>(null);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.removeItem('lumina_token');
+    navigate('/auth');
+  };
 
   useEffect(() => {
     setIsLoading(true);
+    setError(null);
     const { startDate, endDate } = getFilterDates(timeFilter);
 
     const query = `
@@ -59,20 +68,35 @@ function Dashboard() {
       }
     `;
 
-    fetch('http://localhost:8000/graphql', {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000/graphql';
+
+    const token = localStorage.getItem('lumina_token');
+    
+    fetch(apiUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        ...(token ? { 'Authorization': `JWT ${token}` } : {})
+      },
       body: JSON.stringify({ query, variables: { startDate, endDate } })
     })
       .then(res => res.json())
       .then(result => {
-        if (result.data?.dashboardMetrics) {
+        if (result.errors) {
+          const authError = result.errors.some((e: any) => e.message.toLowerCase().includes('do not have permission') || e.message.toLowerCase().includes('signature has expired'));
+          if (authError) {
+            logout();
+            return;
+          }
+          setError(result.errors[0]?.message || "Erro no GraphQL");
+        } else if (result.data?.dashboardMetrics) {
           setMetrics(result.data.dashboardMetrics);
         }
         setIsLoading(false);
       })
       .catch(err => {
         console.error("GraphQL Error:", err);
+        setError("Não foi possível conectar ao backend. Verifique se o Docker está rodando.");
         setIsLoading(false);
       });
 
@@ -106,6 +130,11 @@ function Dashboard() {
       </header>
 
       <main>
+        {error && (
+          <div style={{ backgroundColor: 'rgba(255, 68, 68, 0.1)', border: '1px solid var(--accent-red)', color: 'var(--accent-red)', padding: '1rem', borderRadius: 'var(--radius-sm)', marginBottom: '1.5rem', textAlign: 'center' }}>
+            {error}
+          </div>
+        )}
         <section className="metrics-grid">
           <MetricCard
             title="Receita Recorrente Mensal"
