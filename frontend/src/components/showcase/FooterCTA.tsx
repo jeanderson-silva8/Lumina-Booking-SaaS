@@ -1,7 +1,10 @@
 import { motion } from 'framer-motion';
-import { ArrowRight, FileText } from 'lucide-react';
+import { LayoutDashboard } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function FooterCTA() {
+  const navigate = useNavigate();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -26,17 +29,17 @@ export default function FooterCTA() {
             boxShadow: '0 4px 20px rgba(34, 211, 238, 0.25)',
           }}
         >
-          Acessar Demo
-          <ArrowRight size={16} />
+          Vamos elevar o nível de sua empresa
         </motion.button>
         <motion.button
+          onClick={() => navigate('/dashboard')}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
-          className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-cyan-400 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300"
+          className="flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-cyan-400 border border-cyan-500/20 hover:border-cyan-500/40 transition-all duration-300 cursor-pointer"
           style={{ background: 'rgba(34, 211, 238, 0.05)' }}
         >
-          <FileText size={16} />
-          Documentação Técnica
+          <LayoutDashboard size={16} />
+          Voltar ao dashboard
         </motion.button>
       </div>
     </motion.div>
