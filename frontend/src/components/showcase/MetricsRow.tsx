@@ -61,6 +61,9 @@ function AnimatedNumber({ value, prefix, suffix, color }: { value: number; prefi
   const motionValue = useMotionValue(0);
 
   useEffect(() => {
+    // Detecta a quantidade exata de casas decimais do valor original para não arredondar errado (ex: 1.74 -> 1.7)
+    const decimals = value % 1 !== 0 ? value.toString().split('.')[1]?.length || 1 : 0;
+    
     const controls = animate(motionValue, value, {
       duration: 1.5,
       ease: [0.22, 1, 0.36, 1],
@@ -68,7 +71,7 @@ function AnimatedNumber({ value, prefix, suffix, color }: { value: number; prefi
         if (value >= 100) {
           setDisplay(Math.round(latest).toString());
         } else {
-          setDisplay(latest.toFixed(1));
+          setDisplay(latest.toFixed(decimals));
         }
       },
     });
