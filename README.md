@@ -96,4 +96,4 @@ docker-compose exec web python backend/seed_subscriptions.py
 Construído desde o mapeamento de arquitetura até os Deploys de nuvem, passando por infraestruturas robustas, otimização Visual e SEO.
 Sinta-se à vontade para auditar as queries ou testar a interatividade da Dashboard.
 
-**Lumina Integration Engine — TLS 1.3**
+**Jeanderson silva😎🤌**

@@ -209,7 +209,7 @@ export default function IntegrationShowcase() {
         {/* Simple Footer */}
         <footer className="max-w-7xl mx-auto px-4 sm:px-6 py-6 text-center">
           <p className="text-xs text-gray-600">
-            Lumina Integration Engine — TLS 1.3 — {new Date().getFullYear()}
+            Jeanderson silva😎🤌 — {new Date().getFullYear()}
           </p>
         </footer>
       </main>
