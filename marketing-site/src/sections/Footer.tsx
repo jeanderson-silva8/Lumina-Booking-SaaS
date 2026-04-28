@@ -4,7 +4,7 @@ import { Github, Linkedin, Mail, MessageCircle } from 'lucide-react';
 
 const socialLinks = [
   { icon: MessageCircle, href: 'https://wa.me/5575997067931', label: 'WhatsApp' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/jeanderson-silva-rodrigues821/', label: 'LinkedIn' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/jeanderson-silva-rodrigues821/?skipRedirect=true', label: 'LinkedIn' },
   { icon: Github, href: 'https://github.com/jeanderson-silva8', label: 'GitHub' },
   { icon: Mail, href: 'mailto:silvajeanderson165@gmail.com', label: 'Email' },
 ];
