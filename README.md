@@ -45,13 +45,14 @@ O ecossistema Lumina segue uma rígida Arquitetura de 3 Camadas inspirada nos pr
 - Node.js (v18+)
 - Python (3.11+)
 - Docker e Docker Compose
+---
 ### 2. Rodando o Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
 Acesse: http://localhost:5173
-
+---
 3. Rodando o Backend (Docker)
 Na raiz do projeto, suba a infraestrutura completa de contêineres:
 
@@ -63,7 +64,7 @@ bash
 docker-compose exec web python backend/manage.py migrate
 docker-compose exec web python backend/seed_subscriptions.py
 Acesse a API GraphQL em: http://localhost:8000/graphql
-
+---
 📂 Visão Geral da Estrutura
 text
 ├── .github/          # Fluxos de automação (CI/CD Zero Downtime e Actions)
@@ -72,6 +73,7 @@ text
 ├── frontend/         # React, Vite, Componentes Midnight Luxe, Animações Form
 ├── tools/            # Scripts autonômos regenerativos para validação
 └── docker-compose.*  # Orquestração de contêineres prod/dev
+---
 🤝 Autor
 Jeanderson Silva 😎🤌
 
