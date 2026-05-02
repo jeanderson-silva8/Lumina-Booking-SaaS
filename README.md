@@ -74,34 +74,41 @@ O ecossistema Lumina segue uma rígida Arquitetura de 3 Camadas inspirada nos pr
 cd frontend
 npm install
 npm run dev
-Acesse: http://localhost:5173
----
-3. Rodando o Backend (Docker)
+```
+> Acesse: `http://localhost:5173`
+
+### 3. Rodando o Backend (Docker)
 Na raiz do projeto, suba a infraestrutura completa de contêineres:
-
-bash
+```bash
 docker-compose up -d --build
-Caso queira popular o banco com dados massivos para o teste de estresse:
+```
 
-bash
+Caso queira popular o banco com dados massivos para o teste de estresse:
+```bash
 docker-compose exec web python backend/manage.py migrate
 docker-compose exec web python backend/seed_subscriptions.py
-Acesse a API GraphQL em: http://localhost:8000/graphql
+```
+> Acesse a API GraphQL em: `http://localhost:8000/graphql`
+
 ---
-📂 Visão Geral da Estrutura
-text
+
+## 📂 Visão Geral da Estrutura
+
+```text
 ├── .github/          # Fluxos de automação (CI/CD Zero Downtime e Actions)
 ├── architecture/     # Procedimentos Operacionais Padrão (POPs/VLAEG)
 ├── backend/          # Django, Models, GraphQL Schema, Seeder Massivo
 ├── frontend/         # React, Vite, Componentes Midnight Luxe, Animações Form
 ├── tools/            # Scripts autonômos regenerativos para validação
 └── docker-compose.*  # Orquestração de contêineres prod/dev
----
-🤝 Autor
-Jeanderson Silva 😎🤌
+```
 
-Construído desde o mapeamento de arquitetura até os deploys de nuvem, passando por infraestruturas robustas, otimização visual e SEO.
+---
+
+## 🤝 Autor
+
+**Jeanderson Silva 😎🤌**
+
+Construído desde o mapeamento de arquitetura até os deploys de nuvem, passando por infraestruturas robustas, otimização visual e SEO. 
 
 Sinta-se à vontade para auditar as queries, explorar o código fonte ou testar a interatividade do Dashboard ao vivo!
-
-16:21
