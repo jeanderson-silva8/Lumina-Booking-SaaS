@@ -6,7 +6,7 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 > **🟢 LIVE DEMO:** [Acesse o Lumina Ao Vivo Aqui](https://marketing-site-black-pi.vercel.app)
-*(Insira aqui um GIF de 5 a 10 segundos mostrando a tela do dashboard funcionando e as animações do Glassmorphism)*
+
 ---
 ## 🛑 O Problema
 Plataformas SaaS corporativas costumam sofrer com severos gargalos no banco de dados quando tentam calcular métricas financeiras complexas (MRR, LTV e Churn Rate) em tempo real. Lidar simultaneamente com milhares de assinaturas ativas de dezenas de empresas diferentes (Tenants) costuma travar a API ou gerar respostas extremamente lentas para o Frontend.
