@@ -1,99 +1,82 @@
-<div align="center">
-  <img src="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/activity.svg" width="60" alt="Lumina Engine Icon">
-  <h1>Lumina Analytics SaaS</h1>
-  <p><strong>Plataforma B2B de Inteligência Financeira e Churn Prediction</strong></p>
-
-  [![React](https://img.shields.io/badge/Frontend-React%20v19-22D3EE?logo=react&logoColor=22D3EE&style=for-the-badge)](https://react.dev/)
-  [![Django](https://img.shields.io/badge/Backend-Django%205-092E20?logo=django&logoColor=white&style=for-the-badge)](https://www.djangoproject.com/)
-  [![GraphQL](https://img.shields.io/badge/API-GraphQL-E10098?logo=graphql&logoColor=white&style=for-the-badge)](https://graphql.org/)
-  [![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-4169E1?logo=postgresql&logoColor=white&style=for-the-badge)](https://www.postgresql.org/)
-  [![Docker](https://img.shields.io/badge/Deploy-Docker%20%7C%20VPS-2496ED?logo=docker&logoColor=white&style=for-the-badge)](https://www.docker.com/)
-
-</div>
-
+# 🌌 Lumina Analytics Engine
+**Plataforma B2B de Inteligência Financeira e Churn Prediction**
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)
+![GraphQL](https://img.shields.io/badge/GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
+> **🟢 LIVE DEMO:** [Acesse o Lumina Ao Vivo Aqui](https://marketing-site-black-pi.vercel.app)
+*(Insira aqui um GIF de 5 a 10 segundos mostrando a tela do dashboard funcionando e as animações do Glassmorphism)*
 ---
-
-## 📖 Sobre o Projeto
-O **Lumina Analytics** é um motor avançado ("SaaS") de métricas financeiras focado em analisar assinaturas (MRR, LTV e Churn Rate). Ele foi idealizado sob uma estética rigorosa batizada de **Midnight Luxe** — unindo minimalismo luxuoso à robustez de uma extração de dados assíncrona. 
-
-A arquitetura do projeto foi desenhada visando extrema segurança e estabilidade, operando através de containers isolados (Docker), integrações via GraphQL para trafegar o payload de dados e garantindo a segregação B2B por Tenant UUIDs.
-
+## 🛑 O Problema
+Plataformas SaaS corporativas costumam sofrer com severos gargalos no banco de dados quando tentam calcular métricas financeiras complexas (MRR, LTV e Churn Rate) em tempo real. Lidar simultaneamente com milhares de assinaturas ativas de dezenas de empresas diferentes (Tenants) costuma travar a API ou gerar respostas extremamente lentas para o Frontend.
+## ✅ A Solução (Lumina)
+O Lumina Analytics é um motor avançado de métricas financeiras B2B desenhado para **processamento massivo e isolamento de dados**. 
+Ele resolve o problema de performance delegando os cálculos pesados diretamente para a fonte da verdade (PostgreSQL), gerenciando o tráfego via filas assíncronas (Celery/Redis) e entregando para o Frontend apenas os bytes estritamente necessários através de uma API GraphQL otimizada. Tudo isso embalado numa interface luxuosa e rigorosa batizada de *Midnight Luxe*.
 ---
-
+## 🧠 Maior Desafio Técnico Superado
+**Garantir precisão e alta performance em Testes de Estresse com carga massiva.**
+O backend foi preparado e populado com dezenas de milhares de registros falsos mapeados via Python Faker. Para que a API não caísse ao processar esses dados, implementei duas estratégias cruciais:
+1. **Otimização no Banco:** O uso de operações como `DATE_TRUNC` e `GROUP BY` diretamente na query do PostgreSQL, poupando a API (Python/Django) de ter que iterar sobre milhares de objetos em memória.
+2. **Data Fetching sem Payload Cego:** Utilização do GraphQL para eliminar o *over-fetching*. O Dashboard pede e a rede trafega **exatamente** os campos que vão ser renderizados na tela, garantindo um carregamento instantâneo no frontend.
+---
 ## ✨ Principais Funcionalidades
-
-- **Dashboard Financeiro (Midnight Luxe):** Interface rica (Glassmorphism), responsiva e interativa que compila dados complexos (Receita Ativa vs Perdida).
-- **Integração Real-Time (Mock/Showcase):** Mostruário de arquitetura para ingestão de dados em nuvem (Stripe, Hotmart) protegido por Webhooks e Handshakes JWT.
-- **Consultas via GraphQL:** Consumo e estruturação sem payload 'cego'. O Dashboard pede e carrega apenas os bytes essenciais para a renderização do frontend.
-- **Seeding Massivo de Dados (Teste de Estresse):** Backend preparado e populado com dezenas de milhares de registros falsos mapeados via Python Faker para exibir agregações e precisão milimétrica nas taxas geradas.
+- **Dashboard Financeiro (Midnight Luxe):** Interface rica com Glassmorphism, totalmente responsiva e guiada por animações suaves que compila dados complexos (Receita Ativa vs Perdida).
+- **Segregação B2B por Tenant:** Dados de clientes isolados de forma segura através de Tenant UUIDs.
+- **Integração Real-Time (Mock/Showcase):** Mostruário de arquitetura para ingestão de dados em nuvem (Stripe, Hotmart) protegido por Webhooks e Handshakes.
 - **Autenticação Segura JWT:** Regras rigorosas de segurança impedindo travessias (Directory Traversal) e protegendo a integridade das chamadas de API.
-
 ---
-
 ## 🛠️ Stack Tecnológico & Arquitetura
-
-O ecossistema Lumina segue uma rígida **Arquitetura de 3 Camadas** inspirada no protocolo construtivo **A.N.T e V.L.A.E.G**:
-
-### Frontend (CDN Vercel / Edge Network)
+O ecossistema Lumina segue uma rígida Arquitetura de 3 Camadas inspirada nos protocolos construtivos A.N.T e V.L.A.E.G:
+### 1. Frontend (CDN Vercel / Edge Network)
 - **Framework:** React 19 + TypeScript + Vite.
-- **Estilização:** TailwindCSS Customizado, Animações com `framer-motion` e visual rico guiado por variáveis CSS (Design Tokens Hex: `#A020F0`, `#00FFFF`).
-- **Data Fetch:** Comunicação encapsulada chamando diretamente a rota segura do Graphene (GraphQL).
-
-### Backend (Docker + AWS EC2 / DigitalOcean)
-- **Motor Lógico:** Python 3 + Django 5.
-- **Processos em Background:** Escalonamento e _Background Tasks_ utilizando fila de processamento (Celery) e Redis para ingestões massivas não travarem a API.
-- **API Engine:** Graphene-Django (GraphQL Api).
-- **Gateway & Orquestração:** Docker Compose fortificando `web`, `db` e mapeando as portas internas numa sub-rede selada (`bridge`), com o banco de dados impenetrável por vias externas diretas.
-
-### Banco de Dados (Fonte da Verdade)
-- **PostgreSQL 15:** Mantêm as tabelas cruciais do sistema (`Subscription`, `Auth`) e realiza cálculos e agregações (GROUP BY, DATE_TRUNC) na própria base para aliviar a carga da API.
-
+- **Estilização & UI:** TailwindCSS Customizado e Animações fluidas com Framer Motion. Visual rico guiado por Design Tokens (Hex: `#A020F0`, `#00FFFF`).
+- **Comunicação:** Chamadas encapsuladas e diretas à rota segura do Graphene (GraphQL).
+### 2. Backend (Docker + AWS EC2 / DigitalOcean)
+- **Motor Lógico:** Python 3.11+ e Django 5.
+- **API Engine:** Graphene-Django para expor o schema GraphQL.
+- **Processamento Assíncrono:** Fila de processamento com Celery e Redis para garantir que ingestões massivas não travem a thread principal da API.
+- **Gateway & Orquestração:** Docker Compose fortificando as camadas de web e db, mapeando as portas internas numa sub-rede selada (bridge). O banco de dados é impenetrável por vias externas diretas.
+### 3. Banco de Dados (Fonte da Verdade)
+- **PostgreSQL 15:** Mantém a integridade transacional do sistema (Subscriptions, Auth) e realiza cálculos em tempo real.
 ---
-
 ## 🚀 Como Executar Localmente
-
 ### 1. Requisitos
 - Node.js (v18+)
 - Python (3.11+)
 - Docker e Docker Compose
-
 ### 2. Rodando o Frontend
 ```bash
 cd frontend
 npm install
 npm run dev
-# Acesse: http://localhost:5173
-```
+Acesse: http://localhost:5173
 
-### 3. Rodando o Backend (Docker)
-```bash
-# Na raiz do projeto, suba os containers
+3. Rodando o Backend (Docker)
+Na raiz do projeto, suba a infraestrutura completa de contêineres:
+
+bash
 docker-compose up -d --build
+Caso queira popular o banco com dados massivos para o teste de estresse:
 
-# Popule o banco com dados massivos de teste
+bash
 docker-compose exec web python backend/manage.py migrate
 docker-compose exec web python backend/seed_subscriptions.py
+Acesse a API GraphQL em: http://localhost:8000/graphql
 
-# Acesse a API GraphQL: http://localhost:8000/graphql
-```
-
----
-
-## 📂 Visão Geral da Estrutura
-
-```text
+📂 Visão Geral da Estrutura
+text
 ├── .github/          # Fluxos de automação (CI/CD Zero Downtime e Actions)
 ├── architecture/     # Procedimentos Operacionais Padrão (POPs/VLAEG)
 ├── backend/          # Django, Models, GraphQL Schema, Seeder Massivo
 ├── frontend/         # React, Vite, Componentes Midnight Luxe, Animações Form
 ├── tools/            # Scripts autonômos regenerativos para validação
 └── docker-compose.*  # Orquestração de contêineres prod/dev
-```
+🤝 Autor
+Jeanderson Silva 😎🤌
 
----
+Construído desde o mapeamento de arquitetura até os deploys de nuvem, passando por infraestruturas robustas, otimização visual e SEO.
 
-## 🤝 Autor e Portfólio
-Construído desde o mapeamento de arquitetura até os Deploys de nuvem, passando por infraestruturas robustas, otimização Visual e SEO.
-Sinta-se à vontade para auditar as queries ou testar a interatividade da Dashboard.
+Sinta-se à vontade para auditar as queries, explorar o código fonte ou testar a interatividade do Dashboard ao vivo!
 
-**Jeanderson silva😎🤌**
+16:21
