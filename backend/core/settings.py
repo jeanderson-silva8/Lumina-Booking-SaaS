@@ -1,16 +1,33 @@
 """
 Django settings for core project.
+═══════════════════════════════════════════════════════
+🛡️ PROTOCOLO DE SEGURANÇA ENTERPRISE — LUMINA ANALYTICS
+═══════════════════════════════════════════════════════
 """
 import os
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key-for-lumina')
-DEBUG = int(os.environ.get('DEBUG', 1))
+# ═══════════════════════════════════════════════════════
+# 🔐 CAMADA 1: CHAVES E MODO DE EXECUÇÃO
+# ═══════════════════════════════════════════════════════
 
-ALLOWED_HOSTS = ['*']
+# [SEGURANÇA] SECRET_KEY sem fallback — crashar se não existir é o comportamento correto
+SECRET_KEY = os.environ.get('SECRET_KEY', os.environ.get('DJANGO_SECRET_KEY'))
+if not SECRET_KEY:
+    raise ValueError("[SEGURANÇA] SECRET_KEY não definida! Configure no .env ou variável de ambiente.")
+
+# [SEGURANÇA] DEBUG forçado False em produção
+DEBUG = os.environ.get('DEBUG', '0') == '1'
+
+# [SEGURANÇA] ALLOWED_HOSTS restrito — NUNCA usar ['*'] em produção
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'localhost,127.0.0.1,marketing-site-black-pi.vercel.app'
+).split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -41,7 +58,18 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'core.urls'
-CORS_ALLOW_ALL_ORIGINS = True
+
+# ═══════════════════════════════════════════════════════
+# 🛡️ CAMADA 3: CORS RESTRITO
+# ═══════════════════════════════════════════════════════
+
+# [SEGURANÇA] CORS restrito — aceita APENAS origens autorizadas
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    'CORS_ORIGINS',
+    'http://localhost:5173,http://localhost:3000,https://marketing-site-black-pi.vercel.app'
+).split(',')
+CORS_ALLOW_CREDENTIALS = True
 
 TEMPLATES = [
     {
@@ -87,12 +115,47 @@ USE_TZ = True
 STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# ═══════════════════════════════════════════════════════
+# 🛡️ CAMADA 4: HEADERS HTTP DE SEGURANÇA
+# ═══════════════════════════════════════════════════════
+
+# [SEGURANÇA] XSS Protection
+SECURE_BROWSER_XSS_FILTER = True
+
+# [SEGURANÇA] Impede Content-Type Sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# [SEGURANÇA] X-Frame-Options — Impede clickjacking (iframes maliciosos)
+X_FRAME_OPTIONS = 'DENY'
+
+# [SEGURANÇA] HSTS — Força HTTPS por 1 ano
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 31536000  # 1 ano
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_SSL_REDIRECT = True
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+
+# ═══════════════════════════════════════════════════════
+# 🔐 CAMADA 2: JWT CONFIGURATION (GraphQL)
+# ═══════════════════════════════════════════════════════
+
 # Configurando o GraphQL Graphene
 GRAPHENE = {
     'SCHEMA': 'core.schema.schema',
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
+}
+
+# [SEGURANÇA] JWT com expiração curta (15 minutos)
+GRAPHQL_JWT = {
+    'JWT_EXPIRATION_DELTA': timedelta(minutes=15),
+    'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
+    'JWT_VERIFY': True,
+    'JWT_VERIFY_EXPIRATION': True,
 }
 
 AUTHENTICATION_BACKENDS = [
