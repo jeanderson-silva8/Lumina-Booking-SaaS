@@ -24,7 +24,7 @@ Organização:
 
 ---
 
-## 📌 Nota sobre escopo (importante antes de ler os achados)
+## 📌 Nota sobre escopo 
 
 O autor confirmou que esta é uma **versão de portfólio (prévia)** com decisões de escopo conscientes, agora documentadas no `README.md` na seção "⚠️ Escopo desta versão":
 
@@ -35,7 +35,7 @@ O autor confirmou que esta é uma **versão de portfólio (prévia)** com decis�
 
 **Isso não é fraude — é decisão de escopo legítima para portfólio.** O problema original era que o README descrevia essas features como entregues. Com a seção "Escopo desta versão" agora no README, a distância entre promessa e entrega foi fechada honestamente.
 
-**O que continua sendo achado real (independente do escopo):**
+**O que continua sendo achado real:**
 
 Os 13 achados críticos do Bloco 3 não dependem de a feature multi-tenant existir. São decisões de configuração (`csrf_exempt`, introspecção em prod, `ALLOWED_HOSTS=*` como fallback), bugs de implementação (`ProtectedRoute` que aceita qualquer string), e dependências abandonadas. Vale corrigir mesmo numa demo, porque uma demo que segura essas básicas é exatamente o que diferencia portfólio sênior.
 
