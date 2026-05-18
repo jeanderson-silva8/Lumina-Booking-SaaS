@@ -1,6 +1,7 @@
 import sys
 import os
 import random
+import logging
 from datetime import timedelta, datetime
 import django
 
@@ -13,21 +14,30 @@ django.setup()
 from metrics.models import Subscription
 from faker import Faker
 
+# Logger estruturado (auditoria 2026-05-17, item 15 da Sessão 1).
+# Substitui print() para padronizar formato e permitir filtragem por nível.
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S',
+)
+logger = logging.getLogger(__name__)
+
 fake = Faker()
 
 def run():
-    print("Iniciando o Seeder Massivo de Subscriptions (O Teste de Fogo)...")
-    
+    logger.info("Iniciando o Seeder Massivo de Subscriptions (O Teste de Fogo)...")
+
     # Parâmetros
     TOTAL_RECORDS = 25000
     START_DATE_LIMIT = datetime(2023, 1, 1) # ~3 years ago
     END_DATE_LIMIT = datetime(2026, 4, 15)
-    
+
     # Limpar banco
-    print("Limpando banco de dados...")
+    logger.info("Limpando banco de dados...")
     Subscription.objects.all().delete()
-    
-    print(f"Gerando {TOTAL_RECORDS} inscrições...")
+
+    logger.info("Gerando %d inscrições...", TOTAL_RECORDS)
     
     plans = [
         {"name": "Starter", "price": 2900, "weight": 60},
@@ -80,15 +90,15 @@ def run():
         
         if len(batch) >= batch_size:
             Subscription.objects.bulk_create(batch)
-            print(f"{i+1} registros inseridos...")
+            logger.info("%d registros inseridos...", i + 1)
             batch = []
 
     # Final batch
     if batch:
         Subscription.objects.bulk_create(batch)
-        print(f"{TOTAL_RECORDS} registros inseridos com sucesso!")
+        logger.info("%d registros inseridos com sucesso!", TOTAL_RECORDS)
 
-    print("Seeding concluído!")
+    logger.info("Seeding concluído!")
 
 if __name__ == "__main__":
     run()

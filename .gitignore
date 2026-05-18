@@ -26,6 +26,13 @@ db.sqlite3
 temp/
 *~
 
+# Internal docs (process notes, AI prompts, references) — not for public repo
+docs/_internal/
+
+# Build artifacts
+build-error.log
+*.log
+
 # OS Files
 .DS_Store
 Thumbs.db

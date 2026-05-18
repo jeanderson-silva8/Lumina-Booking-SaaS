@@ -138,6 +138,13 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True
     SESSION_COOKIE_HTTPONLY = True
 
+# [SEGURANÇA] SameSite explícito para cookies — mitiga CSRF.
+# 'Strict' = nunca enviado em navegação cross-site (proteção máxima).
+# Usar 'Lax' apenas se houver fluxo legítimo de navegação cross-site (ex: OAuth callback).
+# Auditoria 2026-05-17, item 17 da Sessão 1: defaults do Django não são suficientes para postura "enterprise".
+SESSION_COOKIE_SAMESITE = 'Strict'
+CSRF_COOKIE_SAMESITE = 'Strict'
+
 # ═══════════════════════════════════════════════════════
 # 🔐 CAMADA 2: JWT CONFIGURATION (GraphQL)
 # ═══════════════════════════════════════════════════════

@@ -1,0 +1,74 @@
+# Dependabot — atualização automática de dependências
+# Atende ao item 30 do AUDIT_CHECKLIST.md (dependências atualizadas e auditadas)
+# e ao plano de ação da auditoria 2026-05-17 (item 12 da Sessão 1).
+
+version: 2
+updates:
+  # Backend Python (Django + GraphQL)
+  - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "backend"
+    # Agrupa updates patch/minor — reduz ruído de PRs
+    groups:
+      django-ecosystem:
+        patterns:
+          - "django*"
+          - "graphene*"
+          - "graphql*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Frontend Node (React + Vite)
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "frontend"
+    groups:
+      react-ecosystem:
+        patterns:
+          - "react*"
+          - "@radix-ui/*"
+        update-types:
+          - "minor"
+          - "patch"
+
+  # Marketing site (Vercel)
+  - package-ecosystem: "npm"
+    directory: "/marketing-site"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    labels:
+      - "dependencies"
+      - "marketing-site"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "ci"
+
+  # Docker (backend Dockerfile)
+  - package-ecosystem: "docker"
+    directory: "/backend"
+    schedule:
+      interval: "monthly"
+    labels:
+      - "dependencies"
+      - "docker"

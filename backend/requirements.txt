@@ -1,9 +1,14 @@
+# Core
 Django>=4.2,<5.0
 psycopg2-binary>=2.9
+
+# GraphQL
 graphene-django>=3.0
-djangorestframework>=3.14
-djangorestframework-simplejwt>=5.3
+django-graphql-jwt==0.3.4  # TODO: lib abandonada (último release 2020) — auditoria 2026-05-17 crítico #11
+
+# CORS
 django-cors-headers>=4.3
-pandas>=2.0
+
+# Dev tools — usados apenas em scripts standalone (seed_subscriptions.py).
+# TODO: mover para requirements-dev.txt em Sessão futura.
 Faker>=20.0
-django-graphql-jwt==0.3.4

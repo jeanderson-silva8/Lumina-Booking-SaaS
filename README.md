@@ -25,6 +25,21 @@ Ele resolve o problema de performance delegando os cálculos pesados diretamente
 
 ---
 
+## ⚠️ Escopo desta versão (honestidade primeiro)
+
+Esta é uma **versão de portfólio (prévia)**. Decisões de escopo conscientes que vale registrar antes de o leitor seguir adiante:
+
+- **Multi-tenant não está implementado.** A separação por `tenant_id` faz parte da visão arquitetural acima, mas **não foi executada no código** porque exigiria integração real de pagamento recorrente (Stripe/MercadoPago), o que geraria custo operacional incompatível com um projeto-demo. O modelo `Subscription` hoje não tem campo de dono — qualquer usuário autenticado vê todas as métricas.
+- **Celery/Redis são destino arquitetural, não implementação atual.** O `docker-compose` não levanta Redis e não há tarefas Celery no código.
+- **Django 5 é destino**, mas `requirements.txt` ainda usa `Django>=4.2,<5.0`.
+- **Dados são sintéticos** (gerados por `Faker`) — não há clientes reais, não há PII real. O seed em `backend/seed_subscriptions.py` cria centenas de assinaturas fictícias só para popular o dashboard.
+- **Sem integração de pagamento real.** `STRIPE_*` em `.env.example` é decorativo — não há rota de webhook implementada.
+- **CI atual é deploy-only** (`.github/workflows/deploy_backend.yml` faz `git pull + docker-compose up` na VM). Não há lint, testes automatizados, `pip-audit` ou checks de segurança rodando.
+
+A intenção é que esta seção evolua para "✅ implementado" item por item conforme o projeto sair do estágio de portfólio. Veja [`docs/AUDIT_REPORT_2026-05-17.md`](docs/AUDIT_REPORT_2026-05-17.md) para a auditoria completa de segurança, incluindo os achados que **não dependem** do escopo acima e merecem correção imediata.
+
+---
+
 ## 🧠 Maior Desafio Técnico Superado
 **Garantir precisão e alta performance em Testes de Estresse com carga massiva.**
 O backend foi preparado e populado com dezenas de milhares de registros falsos mapeados via Python Faker. Para que a API não caísse ao processar esses dados, implementei duas estratégias cruciais:

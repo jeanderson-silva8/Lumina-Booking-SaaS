@@ -6,8 +6,10 @@ services:
     container_name: lumina_postgres_prod
     environment:
       POSTGRES_DB: lumina_prod
-      POSTGRES_USER: ${PROD_DB_USER:-lumina_admin}
-      POSTGRES_PASSWORD: ${PROD_DB_PASSWORD:-securepassword123}
+      # Fail-fast: docker-compose aborta o boot se essas envs não estiverem definidas.
+      # NÃO adicionar defaults aqui — defaults inseguros em prod são o achado crítico #1 da auditoria 2026-05-17.
+      POSTGRES_USER: ${PROD_DB_USER:?PROD_DB_USER obrigatório em produção}
+      POSTGRES_PASSWORD: ${PROD_DB_PASSWORD:?PROD_DB_PASSWORD obrigatório em produção}
     volumes:
       - postgres_prod_data:/var/lib/postgresql/data
     restart: always # Auto-restart no caso de reboot da Droplet/EC2
@@ -27,10 +29,12 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - SECRET_KEY=${PROD_SECRET_KEY}
+      # Fail-fast em todas as envs sensíveis (sem defaults inseguros).
+      # SECRET_KEY já era exigida; ALLOWED_HOSTS e credenciais do banco agora também.
+      - SECRET_KEY=${PROD_SECRET_KEY:?PROD_SECRET_KEY obrigatório em produção}
       - DEBUG=False # Crítico na AWS/Droplet
-      - ALLOWED_HOSTS=${ALLOWED_PROD_HOSTS:-*}
-      - DATABASE_URL=postgres://${PROD_DB_USER:-lumina_admin}:${PROD_DB_PASSWORD:-securepassword123}@db:5432/lumina_prod
+      - ALLOWED_HOSTS=${ALLOWED_PROD_HOSTS:?ALLOWED_PROD_HOSTS obrigatório (NUNCA usar * em produção)}
+      - DATABASE_URL=postgres://${PROD_DB_USER}:${PROD_DB_PASSWORD}@db:5432/lumina_prod
     depends_on:
       - db
     restart: always
