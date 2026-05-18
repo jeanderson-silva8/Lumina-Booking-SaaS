@@ -4,7 +4,7 @@ Plataforma de Inteligência Financeira (MRR, Churn, LTV) construída sobre Djang
 ![React](https://img.shields.io/badge/React-19-blue?logo=react) ![Django](https://img.shields.io/badge/Django-4.2-092E20?logo=django) ![GraphQL](https://img.shields.io/badge/GraphQL-Graphene-E10098?logo=graphql) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-316192?logo=postgresql) ![Docker](https://img.shields.io/badge/Docker-Multi--stage-2CA5E0?logo=docker) ![Caddy](https://img.shields.io/badge/Caddy-Auto_HTTPS-1F88C0?logo=caddy) ![CI](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions)
 
 🟢 **LIVE DEMO:** [Acesse o Lumina Ao Vivo Aqui](https://marketing-site-black-pi.vercel.app)
-🛡️ **Auditoria de Segurança Aplicada:** [Veja o relatório completo](docs/AUDIT_REPORT_2026-05-17.md)
+🛡️ **Auditoria de Segurança Aplicada:** [[Veja a Auditoria de Segurança Aplicada a Este Projeto](docs/AUDIT_REPORT_2026-05-17.md)
 
 <div align="center">
   <video src="assets/demo-lumina.mp4" autoplay loop muted playsinline width="100%"></video>
@@ -184,38 +184,6 @@ O endpoint GraphQL é o único ponto de entrada da aplicação e por isso recebe
 - **Dockerfile multi-stage:** builder com toolchain (gcc/g++) + runtime mínima sem toolchain
 - **`docker-compose.prod.yml`:** db + web + Caddy, com fail-fast em todas as envs sensíveis (`${VAR:?required}`)
 - **`docker-compose.yml` (dev):** defaults aceitáveis, header explícito "DEV-ONLY"
-
----
-
-## 🚀 Como Executar Localmente
-
-### 1. Requisitos
-- Node.js 18+
-- Python 3.11+
-- Docker + Docker Compose
-
-### 2. Frontend
-```bash
-cd frontend
-npm install
-npm run dev
-```
-> Acesse: `http://localhost:5173`
-
-### 3. Backend (Docker)
-```bash
-docker-compose up -d --build
-```
-
-Para popular o banco com dados sintéticos:
-```bash
-docker-compose exec web python manage.py migrate
-docker-compose exec web python backend/seed_subscriptions.py
-```
-> GraphQL em: `http://localhost:8000/graphql` (GraphiQL habilitado em dev)
-
-### 4. Produção
-`docker-compose -f docker-compose.prod.yml up -d` **só funciona se todas as envs obrigatórias estiverem setadas** (`PROD_SECRET_KEY`, `PROD_DB_USER`, `PROD_DB_PASSWORD`, `ALLOWED_PROD_HOSTS`, `PROD_DOMAIN`). O fail-fast é proposital — ver auditoria 2026-05-17 item 5C.
 
 ---
 
