@@ -4,7 +4,7 @@ Plataforma de Inteligência Financeira (MRR, Churn, LTV) construída sobre Djang
 ![React](https://img.shields.io/badge/React-19-blue?logo=react) ![Django](https://img.shields.io/badge/Django-4.2-092E20?logo=django) ![GraphQL](https://img.shields.io/badge/GraphQL-Graphene-E10098?logo=graphql) ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15-316192?logo=postgresql) ![Docker](https://img.shields.io/badge/Docker-Multi--stage-2CA5E0?logo=docker) ![Caddy](https://img.shields.io/badge/Caddy-Auto_HTTPS-1F88C0?logo=caddy) ![CI](https://img.shields.io/badge/CI-GitHub_Actions-2088FF?logo=githubactions)
 
 🟢 **LIVE DEMO:** [Acesse o Lumina Ao Vivo Aqui](https://marketing-site-black-pi.vercel.app)
-🛡️ **Auditoria de Segurança Aplicada:** [[Veja a Auditoria de Segurança Aplicada a Este Projeto](docs/AUDIT_REPORT_2026-05-17.md)
+🛡️ **Auditoria de Segurança Aplicada:** [Veja a Auditoria de Segurança Aplicada a Este Projeto](docs/AUDIT_REPORT_2026-05-17.md)
 
 <div align="center">
   <video src="assets/demo-lumina.mp4" autoplay loop muted playsinline width="100%"></video>
@@ -22,7 +22,7 @@ Em vez de carregar milhares de registros em memória do Python, agregações com
 
 ---
 
-## ⚠️ Escopo desta versão (honestidade primeiro)
+## ⚠️ Escopo desta versão 
 
 Esta é uma **versão de portfólio (prévia)**. Decisões de escopo conscientes:
 
