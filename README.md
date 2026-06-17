@@ -8,14 +8,10 @@ Plataforma de Inteligência Financeira (MRR, Churn, LTV) construída sobre Djang
 
 <div align="center">
   <div style="max-width: 800px; background-color: #161b22; border: 1px solid #30363d; border-bottom: none; border-top-left-radius: 8px; border-top-right-radius: 8px; padding: 10px; font-family: monospace; font-size: 13px; color: #8b949e; text-align: left;">
-    
+    🔴 &nbsp; 🟡 &nbsp; 🟢 &nbsp;&nbsp;&nbsp; <b>~/lumina-analytics</b>
   </div>
   <div style="max-width: 800px; border: 1px solid #30363d; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px; overflow: hidden; line-height: 0;">
-   <video src="
-
-https://github.com/user-attachments/assets/511ea4a9-369e-4fd4-b721-2d604a26f904
-
-" ...></video>
+    <video src="https://github.com/user-attachments/assets/511ea4a9-369e-4fd4-b721-2d604a26f904" width="100%" height="auto" autoplay loop muted playsinline></video>
   </div>
 </div>
 
